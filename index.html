@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Leadership Slides: October and November</title>
+<style>
+/* Layout: report header, summary tiles, sticky session bar, then per-session rows of October | November | notes */
+:root{
+  --bg:#ffffff; --tint:#f5f2f6; --card:#ffffff; --ink:#2b1d33; --muted:#625468; --line:#e4dce8;
+  --brand:#330044; --accent:#712d90; --accent-soft:#efe4f4;
+  --new:#22704a; --new-soft:#e3f3ea; --gone:#a8322a; --gone-soft:#fbe7e5;
+  --open:#8a5300; --open-soft:#fdf0dc; --done:#22704a; --same:#6d6272; --same-soft:#efecf0;
+  --shadow:0 1px 2px rgba(51,0,68,.06),0 4px 14px rgba(51,0,68,.06);
+  --font:Arial,"Helvetica Neue",Helvetica,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#17111b; --tint:#211827; --card:#1d1522; --ink:#efe8f2; --muted:#b6a9bd; --line:#3a2e42;
+  --brand:#e9d6f1; --accent:#cf9fe6; --accent-soft:#33233d;
+  --new:#7fd3a5; --new-soft:#183327; --gone:#f2a39b; --gone-soft:#3a1c1a;
+  --open:#f3c27a; --open-soft:#3a2a12; --done:#7fd3a5; --same:#b6a9bd; --same-soft:#2a2230;
+  --shadow:none; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#17111b; --tint:#211827; --card:#1d1522; --ink:#efe8f2; --muted:#b6a9bd; --line:#3a2e42;
+  --brand:#e9d6f1; --accent:#cf9fe6; --accent-soft:#33233d;
+  --new:#7fd3a5; --new-soft:#183327; --gone:#f2a39b; --gone-soft:#3a1c1a;
+  --open:#f3c27a; --open-soft:#3a2a12; --done:#7fd3a5; --same:#b6a9bd; --same-soft:#2a2230;
+  --shadow:none; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1280px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--tint);border-bottom:1px solid var(--line)}
+header.top .wrap{padding-block:36px 30px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700;margin:0 0 10px}
+h1{font-size:clamp(26px,4vw,38px);line-height:1.15;color:var(--brand);margin:0 0 8px;text-wrap:balance}
+.lede{font-size:18px;color:var(--ink);margin:0 0 18px;max-width:62ch}
+.versions{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px;color:var(--muted)}
+.versions b{color:var(--ink)}
+.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:4px;margin-right:6px;vertical-align:1px}
+.tag.oct{background:var(--same-soft);color:var(--same)}
+.tag.nov{background:var(--accent-soft);color:var(--accent)}
+
+section.summary .wrap{padding-block:28px 8px}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px 16px;box-shadow:var(--shadow)}
+.tile .big{font-size:28px;font-weight:700;color:var(--brand);font-variant-numeric:tabular-nums;line-height:1.1}
+.tile .lab{font-size:13px;color:var(--muted);margin-top:4px}
+.tile button{all:unset;cursor:pointer;color:var(--accent);font-size:13px;font-weight:700;margin-top:6px;display:inline-block;border-bottom:1px solid currentColor}
+.tile button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.overall{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px}
+.overall h2{font-size:18px;color:var(--brand);margin:0 0 8px}
+.overall ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.overall p{margin:0 0 8px;color:var(--muted);font-size:14px}
+
+nav.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);margin-top:24px}
+nav.bar .wrap{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;padding-block:10px}
+.sess{display:flex;flex-wrap:wrap;gap:6px}
+.sess a{color:var(--accent);text-decoration:none;font-weight:700;font-size:14px;padding:5px 10px;border-radius:5px;border:1px solid var(--line)}
+.sess a:hover{background:var(--accent-soft)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.filters button{font:inherit;font-size:13px;padding:5px 11px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--bg)}
+.filters button:focus-visible,.sess a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+section.session .wrap{padding-block:26px 6px}
+.shead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:14px;border-bottom:2px solid var(--brand);padding-bottom:8px;scroll-margin-top:70px}
+.shead h2{margin:0;font-size:22px;color:var(--brand);text-wrap:balance}
+.shead .meta{color:var(--muted);font-size:14px}
+.empty{color:var(--muted);font-style:italic;margin:6px 0 18px}
+.row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,.95fr);gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.colhead{font-size:12px;color:var(--muted);margin-bottom:5px;font-variant-numeric:tabular-nums}
+.colhead b{color:var(--ink)}
+.shot{display:block;width:100%;aspect-ratio:16/9;max-width:100%;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:var(--tint);padding:0;cursor:zoom-in}
+.shot img{width:100%;height:100%;object-fit:cover;display:block}
+.shot:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.none{display:flex;align-items:center;justify-content:center;width:100%;aspect-ratio:16/9;border:1px dashed var(--line);border-radius:6px;color:var(--muted);font-size:13px;text-align:center;padding:10px}
+.notes{min-width:0;display:flex;flex-direction:column;gap:10px}
+.pill{align-self:flex-start;font-size:12px;font-weight:700;padding:3px 9px;border-radius:4px}
+.k-changed{background:var(--accent-soft);color:var(--accent)}
+.k-same{background:var(--same-soft);color:var(--same)}
+.k-new{background:var(--new-soft);color:var(--new)}
+.k-removed{background:var(--gone-soft);color:var(--gone)}
+.notes h3{font-size:16px;margin:0;color:var(--ink);text-wrap:balance}
+.chg p{margin:0 0 4px}
+.fb{border-left:3px solid var(--open);background:var(--open-soft);padding:9px 12px;border-radius:0 6px 6px 0}
+.fb.done{border-left-color:var(--done);background:var(--new-soft)}
+.fb .h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 10px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--open);margin-bottom:4px}
+.fb.done .h{color:var(--done)}
+.fb p{margin:0;font-size:14px}
+.fb .ref{font-size:12px;color:var(--muted);margin-top:5px}
+
+section.actions{background:var(--tint);border-block:1px solid var(--line);margin-top:24px;scroll-margin-top:60px}
+section.actions .wrap{padding-block:22px 22px;display:grid;gap:12px}
+.a-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 20px}
+.a-head h2{margin:0;font-size:20px;color:var(--brand)}
+.a-sub{margin:2px 0 0;font-size:14px;color:var(--muted)}
+[data-status].err{color:var(--gone);font-weight:700}
+.a-toggle{font-size:14px;display:flex;gap:6px;align-items:center;cursor:pointer}
+.a-help{margin:0;font-size:14px;color:var(--muted);max-width:75ch}
+#a-form .cf{max-width:720px}
+#a-list{display:grid;gap:16px}
+.ag h3{font-size:15px;color:var(--brand);margin:6px 0 8px}
+.ag{display:grid;gap:8px}
+.cm{border-top:1px solid var(--line);padding-top:10px;display:grid;gap:8px}
+.cm-h{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.cm-list{display:grid;gap:8px}
+.ci{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:9px 11px;display:grid;gap:4px;min-width:0}
+.ci.done{opacity:.65}
+.ci.done .ci-text{text-decoration:line-through}
+.ci-top{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.ci-link{font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;min-width:0;overflow-wrap:anywhere}
+.ci-link:hover{text-decoration:underline}
+.ct{font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;border-radius:4px}
+.t-change{background:var(--open-soft);color:var(--open)}
+.t-question{background:var(--accent-soft);color:var(--accent)}
+.t-note{background:var(--same-soft);color:var(--same)}
+.ci-text{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px}
+.ci-by{color:var(--muted);font-size:12px}
+.ci-acts{display:flex;gap:14px}
+.lnk{all:unset;cursor:pointer;font-size:13px;font-weight:700;color:var(--accent)}
+.lnk.del{color:var(--gone)}
+.lnk:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.cf{display:grid;gap:6px}
+.cf textarea{font:inherit;font-size:14px;width:100%;resize:vertical;min-height:52px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+.cf textarea:focus-visible,.cf select:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.cf-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.cf select{font:inherit;font-size:13px;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink)}
+.cf .add{font:inherit;font-size:13px;font-weight:700;padding:6px 14px;border-radius:6px;border:1px solid var(--brand);background:var(--brand);color:var(--bg);cursor:pointer}
+.cf .add:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.row{scroll-margin-top:70px}
+footer .wrap{padding-block:30px 40px;color:var(--muted);font-size:13px;max-width:900px;margin-left:0}
+footer h2{font-size:15px;color:var(--ink);margin:0 0 6px}
+footer p{margin:0 0 8px}
+
+dialog{border:none;border-radius:10px;padding:0;background:var(--card);color:var(--ink);width:min(1500px,96vw);max-height:94vh;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(20,8,26,.7)}
+.zhead{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.zhead strong{font-size:15px}
+.zhead button{font:inherit;font-weight:700;padding:6px 14px;border-radius:6px;border:1px solid var(--line);background:var(--tint);color:var(--ink);cursor:pointer}
+.zbody{display:grid;grid-template-columns:1fr 1fr;gap:14px;padding:16px;overflow:auto;max-height:calc(94vh - 60px)}
+.zbody figure{margin:0}
+.zbody figcaption{font-size:13px;color:var(--muted);margin-bottom:6px}
+.zbody img{width:100%;border:1px solid var(--line);border-radius:6px;display:block}
+
+@media (max-width:1000px){
+  .row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .notes{grid-column:1/-1}
+  .overall{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:560px){
+  .row{grid-template-columns:minmax(0,1fr)}
+  .filters{margin-left:0}
+  .zbody{grid-template-columns:1fr}
+  .lede{font-size:16px}
+}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <p class="eyebrow">Positive Partnerships · PL Leadership</p>
+  <h1>Leading Autism-Inclusive Schools</h1>
+  <p class="lede">What changed between the October trial slides and the November new design, slide by slide, with the trial feedback beside each slide it was about.</p>
+  <div class="versions">
+    <span><span class="tag oct">October</span><b>Trial deck</b>, 54 slides</span>
+    <span><span class="tag nov">November</span><b>New design</b>, 16 November edit, 64 slides</span>
+  </div>
+</div></header>
+
+<section class="summary"><div class="wrap">
+  <div class="tiles" id="tiles"></div>
+  <div class="overall">
+    <div>
+      <h2>What changed overall</h2>
+      <ul>
+        <li>Every slide is in the new Positive Partnerships design, with much less text on screen. The detail now sits in the speaker notes, Facilitator Guide and Participant Workbook.</li>
+        <li>Each session now opens with a session overview slide, and Sessions 2 to 6 also get a title slide. These are the 11 new slides.</li>
+        <li>The clock times are gone from "Today's workshop", and the separate "Today's journey" slide is gone.</li>
+        <li>Several activities now open with a question instead of instructions, such as "A new Year 7 student starts next Monday" and "Imagine a call from the parent of an Autistic student".</li>
+        <li>Long slides were cut back to their main point. The vision slide is now just the question "What does thriving look like for Autistic students in your school?"</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Trial feedback</h2>
+      <p>Facilitator notes and table feedback from the Marion SA trial, summarised and shown on the November slide each point is about.</p>
+      <ul id="fbsum"></ul>
+    </div>
+  </div>
+</div></section>
+
+<nav class="bar" aria-label="Sessions and filters"><div class="wrap">
+  <div class="sess" id="sessnav"></div>
+  <div class="filters" role="group" aria-label="Show">
+    <button type="button" id="f-all" data-f="all" aria-pressed="true">All slides</button>
+    <button type="button" id="f-fb" data-f="fb" aria-pressed="false">Has trial feedback</button>
+    <button type="button" id="f-open" data-f="open" aria-pressed="false">Feedback not fully acted on</button>
+    <button type="button" id="f-newgone" data-f="newgone" aria-pressed="false">New or removed</button>
+  </div>
+</div></nav>
+
+<main id="main"></main>
+
+<footer><div class="wrap">
+  <h2>How this was put together</h2>
+  <p>October slides are the trial deck from the October 2026 trial set. November slides are the 16 November 2026 edit of the new design deck. Both were exported from PowerPoint.</p>
+  <p>Slides were matched by their wording, so a November slide sits beside the October slide it came from even when its title changed. The change notes compare what is on the slide. Speaker notes, the Facilitator Guide and the Participant Workbook are not compared here.</p>
+  <p>Word counts are approximate and count only the words on the slide. Select any slide to see both versions larger.</p>
+</div></footer>
+
+<dialog id="zoom" aria-labelledby="ztitle">
+  <div class="zhead"><strong id="ztitle"></strong><button type="button" id="zclose">Close</button></div>
+  <div class="zbody" id="zbody"></div>
+</dialog>
+
+<script id="data" type="application/json">{"rows": [{"o": 1, "n": 1, "s": 1, "nt": "Leading Autism-Inclusive Schools (cover)", "nw": 12, "ot": "Leading Autism-Inclusive Schools", "ow": 10, "chg": "New cover in the November design.", "k": "changed"}, {"o": 2, "n": 2, "s": 1, "nt": "Acknowledgement of Country", "nw": 3, "ot": "Acknowledgement of Country", "ow": 3, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 3, "n": 3, "s": 1, "nt": "Statement of reconciliation", "nw": 3, "ot": "Statement of reconciliation", "ow": 3, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 4, "n": 4, "s": 1, "nt": "First Nations people are advised that this workshop may contain images and voices of people who are no longer with us.", "nw": 21, "ot": "First Nations people are advised that this workshop may contain images and voices of people who are no longer with us.", "ow": 21, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 5, "n": 5, "s": 1, "nt": "Everyone is welcome here.", "nw": 20, "fb": "Add an introductions slide with time for it, communication preferences (as a slide or on the housekeeping page) and a learning agreement slide.", "chg": "Less text on the welcome slide (73 words down to 26).\nNo introductions, communication preferences or learning agreement slides added yet.", "st": "open", "ref": "Slides 5 to 8 · Welcome, Housekeeping, introductions", "ot": "Everyone is welcome at this workshop. We want you to feel that it is ok to be authentically yourself.", "ow": 54, "k": "changed"}, {"o": 6, "n": 6, "s": 1, "nt": "Housekeeping", "nw": 18, "ot": "Housekeeping", "ow": 16, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 7, "n": 7, "s": 1, "nt": "Today's workshop", "nw": 37, "fb": "The colours and wording were hard to look at on a big screen. Take the times off so facilitators can adapt to how the day is going.", "chg": "Redesigned, and the clock times are gone. Now just the six sessions, numbered (93 words down to 39).", "st": "partly", "ref": "Slide 7 · Today's workshop", "ot": "Today's workshop", "ow": 91, "k": "changed"}, {"o": 8, "n": null, "s": 1, "ot": "Today's journey", "ow": 34, "k": "removed", "chg": "Removed. The six sessions are now listed once, on 'Today's workshop', without clock times."}, {"o": null, "n": 8, "s": 1, "nt": "Why leadership matters, and the evidence", "nw": 32, "k": "new", "chg": "New session overview slide, listing what Session 1 covers."}, {"o": 9, "n": 9, "s": 1, "nt": "Why leadership matters", "nw": 36, "ot": "Why leadership matters", "ow": 46, "chg": "Less text on the slide (46 words down to 36).", "k": "changed"}, {"o": 10, "n": 10, "s": 1, "nt": "The evidence base", "nw": 41, "fb": "Put links to the key references in the participant workbook.", "chg": "Rebuilt in the new design. The workbook now has a reference list.", "st": "done", "ref": "Slide 10 · The evidence base", "ot": "The evidence base", "ow": 36, "k": "changed"}, {"o": 11, "n": 11, "s": 1, "nt": "What the law asks of school leaders", "nw": 37, "fb": "Make a visual showing how the DDA, DSE and NCCD link, such as a funnel or steps, with access and participation first.", "chg": "Retitled 'What the law asks of school leaders' and cut to numbered points (79 words down to 44).\nNo funnel or steps visual yet.", "st": "open", "ref": "Slide 11 · Legal foundations for inclusion", "ot": "Legal foundations for inclusion", "ow": 75, "k": "changed"}, {"o": 12, "n": 12, "s": 1, "nt": "Four Corners inclusion audit", "nw": 44, "fb": "Four corners worked well in the space. Connect it to AITSL Standard 1, Know your learners, and student voice. Label the activity and colour codes.", "chg": "Text cut (72 words down to 48).", "st": "open", "ref": "Slide 12 · Four Corners Inclusion Audit", "ot": "Four Corners Inclusion Audit", "ow": 68, "k": "changed"}, {"o": 13, "n": 13, "s": 1, "nt": "Autism CRC National Guidance: four domains", "nw": 57, "fb": "People needed a few more minutes to finish the inclusion audit. Check whether other states have similar areas to align with. Should we link to Thriving Kids here?", "chg": "Text cut (about 105 words down to 63). 'A vision for inclusion' is now its own section in the session overview.", "st": "open", "ref": "Slides 13 to 15 · National Guidance domains, Inclusion Audit, Vision", "ot": "Autism CRC National Guidance: four domains", "ow": 101, "k": "changed"}, {"o": 14, "n": 14, "s": 1, "nt": "The inclusion audit", "nw": 39, "ot": "The Inclusion Audit", "ow": 60, "chg": "Less text on the slide (60 words down to 39).", "k": "changed"}, {"o": 15, "n": 15, "s": 1, "nt": "What does thriving look like for Autistic students in your school?", "nw": 11, "ot": "A vision for inclusion", "ow": 51, "chg": "Cut to the question alone. The six areas of thriving and the reflection prompt are off the slide (51 words down to 11).", "k": "changed"}, {"o": 16, "n": 16, "s": 1, "nt": "Beyond access", "nw": 29, "fb": "Needs table chat here rather than a whole group discussion.", "chg": "Reordered to build up from access to participation to belonging.", "st": "open", "ref": "Slide 16 · Beyond access", "ot": "Beyond access", "ow": 31, "k": "changed"}, {"o": 17, "n": 17, "s": 1, "nt": "Six commitments of Autism-inclusive leaders", "nw": 61, "fb": "Liked the commitments, but where do they come from? Needs a reference. the facilitator left the six up, gave each table one or two on cards, then took feedback. The slides all look very alike, so a different style would break it up.", "chg": "Text cut (76 words down to 67) and rebuilt in the new design.", "st": "open", "ref": "Slide 17 · Six commitments of Autism-inclusive leaders", "ot": "Six commitments of Autism-inclusive leaders", "ow": 70, "k": "changed"}, {"o": null, "n": 18, "s": 2, "nt": "Session 2", "nw": 2, "k": "new", "chg": "New title slide to mark the start of Session 2."}, {"o": null, "n": 19, "s": 2, "nt": "Leadership reflection and commitment corners", "nw": 29, "k": "new", "chg": "New session overview slide, listing what Session 2 covers."}, {"o": 18, "n": 20, "s": 2, "nt": "Autism-inclusive leadership reflection", "nw": 42, "fb": "'Corners' didn't make sense and got mixed up with the four corners audit. Take it off the slide, books and cards and just say 'Leadership commitments'. A participant suggested adding 'what are we doing well already that we want to keep strengthening'.", "chg": "Now asks 'What are we doing well, and what evidence supports that?' as numbered questions (64 words down to 46).\nThe next slide is still called 'Leadership commitment corners'.", "st": "partly", "ref": "Slides 18 and 19 · Leadership reflection, Leadership Commitment Corners", "ot": "Autism-Inclusive Leadership Reflection", "ow": 60, "k": "changed"}, {"o": 19, "n": 21, "s": 2, "nt": "Leadership commitment corners", "nw": 37, "ot": "Leadership Commitment Corners", "ow": 64, "chg": "Less text on the slide (64 words down to 37).", "k": "changed"}, {"o": 20, "n": 22, "s": 2, "nt": "Walking in their shoes", "nw": 27, "fb": "The facilitator swapped these two slides, starting with the bigger picture then moving to people's own school. Could run as a small group activity. Take out 'Year 7' so people can apply it to their own setting.", "chg": "Text cut (45 words down to 31).\nOrder unchanged and the next slide still says 'A new Year 7 student starts next Monday'.", "st": "open", "ref": "Slides 20 and 21 · Walking in Their Shoes, Student Experience Walkthrough", "ot": "Walking in Their Shoes", "ow": 41, "k": "changed"}, {"o": 21, "n": 23, "s": 2, "nt": "A new Year 7 student starts next Monday", "nw": 42, "ot": "Student Experience Walkthrough", "ow": 55, "chg": "Retitled from 'Student Experience Walkthrough'. Less text on the slide (55 words down to 42).", "k": "changed"}, {"o": 22, "n": 24, "s": 2, "nt": "What gets in the way?", "nw": 43, "fb": "Bring the barriers in on clicks. Include secondary settings, such as break time environments. Acknowledge real limits such as funding.", "chg": "Set out as five headings with short examples (67 words down to 48).", "st": "open", "ref": "Slide 22 · What gets in the way?", "ot": "What gets in the way?", "ow": 62, "k": "changed"}, {"o": 23, "n": 25, "s": 2, "nt": "Morning tea", "nw": 6, "ot": "Morning tea", "ow": 6, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 24, "n": 26, "s": 2, "nt": "What helps Autistic students flourish", "nw": 48, "fb": "Add a lived experience video on self-advocacy and what flourishing means to different people. Check the Autism CRC reference. Adjustments aren't just for now: high expectations, real growth and the student's own goals.", "chg": "Cut to numbered points (91 words down to 53).", "st": "open", "ref": "Slides 24 to 26 · What helps students flourish, Reducing barriers, REBAS", "ot": "What helps Autistic students flourish", "ow": 86, "k": "changed"}, {"o": 25, "n": 27, "s": 2, "nt": "School leaders reduce barriers by", "nw": 41, "ot": "School leaders can reduce barriers by", "ow": 63, "chg": "Retitled from 'School leaders can reduce barriers by'. Less text on the slide (63 words down to 41).", "k": "changed"}, {"o": 26, "n": 28, "s": 2, "nt": "What does REBAS mean for school leaders?", "nw": 41, "ot": "What does REBAS mean for school leaders?", "ow": 71, "chg": "Less text on the slide (71 words down to 41).", "k": "changed"}, {"o": 27, "n": 29, "s": 2, "nt": "What's the barrier?", "nw": 48, "fb": "The partnership scenario cards went out at the same time, so both sets got used here. Put them out separately next time.", "chg": "Cut to numbered questions (60 words down to 51).\nScenario cards unchanged.", "st": "open", "ref": "Slide 27 · What's the barrier?", "ot": "What's the barrier?", "ow": 57, "k": "changed"}, {"o": null, "n": 30, "s": 3, "nt": "Session 3", "nw": 2, "k": "new", "chg": "New title slide to mark the start of Session 3."}, {"o": null, "n": 31, "s": 3, "nt": "Developing staff capability", "nw": 16, "k": "new", "chg": "New session overview slide, listing what Session 3 covers."}, {"o": 28, "n": 32, "s": 3, "nt": "Developing staff capability", "nw": 25, "fb": "A take-home tool for each session would help. Run as a walk, people joined in quickly after the Diversity walk and it turned into a good circle discussion. Needs 8 to 10 minutes.", "chg": "Retitled 'Developing staff capability' and cut to numbered points (54 words down to 28).", "st": "open", "ref": "Slides 28 to 30 · Staff capability, Capability continuum", "ot": "Developing staff capability for autism inclusion", "ow": 48, "k": "changed"}, {"o": 29, "n": 33, "s": 3, "nt": "Capability continuum", "nw": 20, "ot": "Capability continuum", "ow": 34, "chg": "Less text on the slide (34 words down to 20).", "k": "changed"}, {"o": 30, "n": 34, "s": 3, "nt": "Building collective capability", "nw": 40, "ot": "Building collective capability", "ow": 57, "chg": "Less text on the slide (57 words down to 40).", "k": "changed"}, {"o": 31, "n": 35, "s": 3, "nt": "Nothing about us without us", "nw": 56, "fb": "The guide says this phrase came from policy, but it came from community activism and advocacy. Should it read 'Voice is not just being heard, it is about having influence'?", "chg": "Each term now has a short plain line under it.\n'Voice is not being heard. Voice is having influence.' is unchanged.", "st": "open", "ref": "Slide 31 · Nothing About Us Without Us", "ot": "Nothing About Us Without Us", "ow": 52, "k": "changed"}, {"o": 32, "n": 36, "s": 3, "nt": "Student voice and co-design audit", "nw": 33, "fb": "Does another audit feel repetitive? What evidence do we have that we consulted, co-designed and acted? This slide would be good in the PL sessions too.", "chg": "Cut back to five areas to rate (61 words down to 39).", "st": "open", "ref": "Slide 32 · Student Voice and Co-Design Audit", "ot": "Student Voice and Co-Design Audit", "ow": 55, "k": "changed"}, {"o": 33, "n": 37, "s": 3, "nt": "Imagine a call from the parent of an Autistic student.", "nw": 31, "fb": "Add to the guide that some family members are neurodivergent, and some don't know it yet, as many adults haven't had access to support. Families are finding their way just like educators. The slides look very alike, so a bit more variety would help.", "chg": "Text cut (61 words down to 41) and layouts vary more in the new design.\nGuide points not added yet.", "st": "partly", "ref": "Slides 33 to 35 · Families as partners", "ot": "Family perspective reflection", "ow": 58, "k": "changed"}, {"o": 34, "n": 38, "s": 3, "nt": "Families as partners", "nw": 38, "ot": "Families as partners", "ow": 34, "chg": "Rebuilt as three cards, each with a short line explaining it. The reflection question is off the slide.", "k": "changed"}, {"o": 35, "n": 39, "s": 3, "nt": "Effective leaders", "nw": 32, "ot": "Families as partners in inclusion", "ow": 61, "chg": "Retitled from 'Families as partners in inclusion'. Less text on the slide (61 words down to 32).", "k": "changed"}, {"o": 36, "n": 40, "s": 3, "nt": "What would three families from your school tell me tomorrow?", "nw": 26, "ot": "Walk and Talk", "ow": 65, "chg": "Retitled from 'Walk and Talk'. Less text on the slide (65 words down to 26).", "k": "changed"}, {"o": 37, "n": 41, "s": 3, "nt": "Partnership in practice", "nw": 35, "fb": "Is 25 minutes right? Change scenario card 6 to take out the AI wording. The extension question is unclear when one scenario is about CALD families.", "chg": "Cut to numbered questions (46 words down to 38).\nScenario cards unchanged.", "st": "open", "ref": "Slide 37 · Activity 4: Partnership in Practice", "ot": "Partnership in Practice", "ow": 43, "k": "changed"}, {"o": null, "n": 42, "s": 4, "nt": "Session 4", "nw": 2, "k": "new", "chg": "New title slide to mark the start of Session 4."}, {"o": null, "n": 43, "s": 4, "nt": "Environments are more than physical spaces", "nw": 26, "k": "new", "chg": "New session overview slide, listing what Session 4 covers."}, {"o": 38, "n": 44, "s": 4, "nt": "Autism-inclusive environments", "nw": 37, "fb": "This session is too short and could do more on environments. Take out the voting and competition and make it more collaborative. the facilitator used A3 pages for the six areas, two per table, then stuck them on the wall for people to photograph. That worked very well.", "chg": "Rebuilt in the new design with a session overview at the start.\nThe next slide still says 'a gallery walk and votes'.", "st": "open", "ref": "Slides 38 and 39 · Autism-inclusive environments, How can we enhance our schools?", "ot": "Autism-inclusive environments", "ow": 41, "k": "changed"}, {"o": 39, "n": 45, "s": 4, "nt": "How can we enhance our schools?", "nw": 33, "ot": "How can we enhance our schools?", "ow": 63, "chg": "Less text on the slide (63 words down to 33).", "k": "changed"}, {"o": 40, "n": 46, "s": 4, "nt": "Lunch", "nw": 5, "ot": "Lunch", "ow": 5, "chg": "Same wording, in the new design.", "k": "same"}, {"o": null, "n": 47, "s": 5, "nt": "Session 5", "nw": 2, "k": "new", "chg": "New title slide to mark the start of Session 5."}, {"o": null, "n": 48, "s": 5, "nt": "Diverse Autistic identities: student profiles", "nw": 18, "k": "new", "chg": "New session overview slide, listing what Session 5 covers."}, {"o": 41, "n": 49, "s": 5, "nt": "Diverse Autistic identities", "nw": 43, "fb": "Check the scenarios across all the activities so they aren't too alike. Sharing needs more time (25 minutes with three small tables). Give a little more on each profile, such as age, year level, gender and cultural background.", "chg": "Now a student profile card for each table (54 words down to 46).", "st": "open", "ref": "Slides 41 and 42 · Diverse Autistic Identities and debrief", "ot": "Diverse Autistic Identities", "ow": 51, "k": "changed"}, {"o": 42, "n": 50, "s": 5, "nt": "Inclusion is not only about autism.", "nw": 23, "ot": "Diverse Autistic identities: debrief", "ow": 62, "chg": "The debrief is now one statement and one question. The four discussion headings and the reflection box are off the slide (62 words down to 23).", "k": "changed"}, {"o": 43, "n": 51, "s": 5, "nt": "Find someone you haven't worked with today.", "nw": 20, "fb": "Unsure about this activity, as the scenarios are basic. Maybe just keep 'What are students learning about belonging from our culture?' Needs more time to move, talk and feed back.", "chg": "Cut to two prompts: one idea that challenged you, and one leadership implication.\nThe belonging question is now on the next slide.", "st": "partly", "ref": "Slide 43 · Partner Exchange", "ot": "Partner Exchange", "ow": 36, "k": "changed"}, {"o": 44, "n": 52, "s": 5, "nt": "Culture creates conditions", "nw": 39, "fb": "Add something about leaders being open, approachable and willing to be wrong.", "chg": "Set out as a chain from leadership to belonging (53 words down to 42).", "st": "open", "ref": "Slide 44 · Culture creates conditions", "ot": "Culture creates conditions", "ow": 50, "k": "changed"}, {"o": 45, "n": 53, "s": 5, "nt": "Afternoon break", "nw": 6, "ot": "Afternoon break", "ow": 6, "chg": "Same wording, in the new design.", "k": "same"}, {"o": null, "n": 54, "s": 6, "nt": "Session 6", "nw": 2, "k": "new", "chg": "New title slide to mark the start of Session 6."}, {"o": null, "n": 55, "s": 6, "nt": "Leadership in practice: the Leadership Lens", "nw": 28, "k": "new", "chg": "New session overview slide, listing what Session 6 covers."}, {"o": 46, "n": 56, "s": 6, "nt": "Leadership in practice: the Leadership Lens", "nw": 40, "fb": "Not keen on the word 'lens'. Page 17 felt overwhelming. Use the scenarios to model it, then have people think about a real issue in their own school.", "chg": "Now five short questions (62 words down to 46).\nStill called the Leadership Lens.", "st": "open", "ref": "Slide 46 · Leadership in practice (the Leadership Lens)", "ot": "Leadership in practice", "ow": 59, "k": "changed"}, {"o": 47, "n": 57, "s": 6, "nt": "Leading for belonging", "nw": 20, "fb": "Add how we would know students feel they belong: the signs or measures for students, families and staff. The slide doesn't quite match the workbook (page 18). Many brought laptops, so offer a digital version.", "chg": "Text cut (40 words down to 23). The commitment slide that follows now asks what people will see, hear and experience.", "st": "open", "ref": "Slides 47 and 48 · Leading for belonging, Leadership commitment", "ot": "Leading for belonging", "ow": 37, "k": "changed"}, {"o": 48, "n": 58, "s": 6, "nt": "Leadership commitment", "nw": 43, "ot": "Leadership commitment", "ow": 41, "chg": "Same wording, in the new design.", "k": "same"}, {"o": 49, "n": 59, "s": 6, "nt": "Action planning", "nw": 37, "ot": "Action planning", "ow": 66, "chg": "Less text on the slide (66 words down to 37).", "k": "changed"}, {"o": 50, "n": 60, "s": 6, "nt": "Autism-inclusive schools are not built from isolated initiatives.", "nw": 27, "fb": "Take 'Thank you' off the slide. Move the references before the feedback QR, so the QR can stay up as people leave. People had lots of questions about Whole School and other PL options, so leave time for them.", "chg": "'Thank you' is gone, and a 'Keep going with Positive Partnerships' slide covers Whole School and more workshops.\nThe references slide still comes after the feedback slide.", "st": "partly", "ref": "Slides 50 to 54 · close", "ot": "Autism-inclusive schools are not created through isolated initiatives.", "ow": 48, "k": "changed"}, {"o": 51, "n": 61, "s": 6, "nt": "Keep going with Positive Partnerships", "nw": 34, "ot": "Keep going with Positive Partnerships", "ow": 74, "chg": "Less text on the slide (74 words down to 34).", "k": "changed"}, {"o": 52, "n": 62, "s": 6, "nt": "Stay in touch", "nw": 18, "ot": "Resources", "ow": 16, "chg": "Retitled 'Stay in touch'. Same links.", "k": "changed"}, {"o": 53, "n": 63, "s": 6, "nt": "Feedback", "nw": 1, "ot": "Feedback", "ow": 6, "chg": "The 'Feedback link and QR code: TBA' box is gone. The slide is a title only for now, with no link or QR code yet.", "k": "changed"}, {"o": 54, "n": 64, "s": 6, "nt": "References", "nw": 14, "ot": "Executive reference list", "ow": 150, "chg": "Retitled 'References'. The list itself is now in the Facilitator Guide and Participant Workbook.", "k": "changed"}], "sessions": [{"n": 1, "name": "Reflect on current practice", "time": "8:30 - 9:35"}, {"n": 2, "name": "Understand the evidence and student experience", "time": "9:35 - 10:30"}, {"n": 3, "name": "Learn from effective approaches", "time": "11:15 - 12:40"}, {"n": 4, "name": "Identify barriers and opportunities", "time": "12:40 - 1:15"}, {"n": 5, "name": "Explore leadership influence", "time": "1:45 - 2:30"}, {"n": 6, "name": "Plan for action and commit to next steps", "time": "2:40 - 4:00"}], "stats": {"old": 54, "new": 64, "kept": 53, "added": 11, "removed": 1, "oavg": 49, "navg": 28, "fb": 25, "st": {"done": 1, "partly": 5, "open": 19}}}</script>
+<script>
+(function(){
+  const D = JSON.parse(document.getElementById('data').textContent);
+  const el = (t, cls, txt) => { const e = document.createElement(t); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  const ST = {done:'Acted on', partly:'Partly acted on', open:'Not yet acted on'};
+  const KIND = {changed:'Changed', same:'Same wording', 'new':'New slide', removed:'Removed'};
+  const s = D.stats;
+  const keyOf = r => r.n ? 'n' + r.n : 'o' + r.o;
+  const ROW = {}; D.rows.forEach(r => ROW[keyOf(r)] = r);
+  const label = k => { if (k === 'general') return 'Whole deck'; const r = ROW[k]; if (!r) return k;
+    return r.n ? 'Nov slide ' + r.n + ': ' + r.nt : 'Oct slide ' + r.o + ' (removed): ' + r.ot; };
+  const TYPES = {change:'Change needed', question:'Question', note:'Note'};
+
+  // ---------- live comments ----------
+  const CM = (function(){
+    let col = null, me = '', usr = null, owner = false, canWrite = false, live = false;
+    let docs = {}, pending = {}, queues = {}, names = {}, showDone = false;
+    const boxes = [];
+    function status(t, err){ document.querySelectorAll('[data-status]').forEach(x=>{ x.textContent = t; x.classList.toggle('err', !!err); }); }
+    function view(){ const v = Object.assign({}, docs); Object.keys(pending).forEach(k=>{ if (pending[k] === null) delete v[k]; else v[k] = pending[k]; }); return v; }
+    function forKey(k, v){ return Object.keys(v).map(id=>Object.assign({id}, v[id])).filter(c=>c.slide===k).sort((a,b)=>(a.at||'').localeCompare(b.at||'')); }
+    function when(iso){ try { return new Date(iso).toLocaleString(undefined,{day:'numeric',month:'short',hour:'numeric',minute:'2-digit'}); } catch(e){ return ''; } }
+    function byline(c){ const n = names[c.by] || (c.by && c.by===me ? 'You' : 'Someone'); let t = n + ' · ' + when(c.at);
+      if (c.done) t += ' · actioned' + (c.doneBy ? ' by ' + (names[c.doneBy] || (c.doneBy===me?'you':'someone')) : ''); return t; }
+    function write(id){
+      let sent;
+      queues[id] = (queues[id] || Promise.resolve()).then(()=>{ if (!(id in pending)) return; sent = pending[id];
+        return sent === null ? col.doc(id).delete() : col.doc(id).set(sent); })
+      .then(()=>{ if (pending[id] === sent) delete pending[id]; if (!Object.keys(pending).length) status('Live. Comments save automatically.'); },
+        e=>{ if (pending[id] === sent) delete pending[id]; paint();
+          status(e && (e.code==='permission_denied'||e.code==='not_granted') ? 'You can read comments here but not add them. Ask Craig for Contributor access.' : 'That comment did not save. Check your connection and try again.', true); });
+    }
+    function put(id, doc){ if (!col || !canWrite) { status('Comments can only be saved when this page is open on claude.ai with Contributor access.', true); return false; }
+      pending[id] = doc; status('Saving.'); paint(); write(id); return true; }
+    function add(k, type, text){ const id = 'c' + Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+      return put(id, {slide:k, type, text, by:me, at:new Date().toISOString(), done:false, doneBy:'', doneAt:''}); }
+    function toggleDone(c){ const d = view()[c.id]; if (!d) return; const nd = !d.done;
+      put(c.id, Object.assign({}, d, {done:nd, doneBy: nd ? me : '', doneAt: nd ? new Date().toISOString() : ''})); }
+
+    function item(c, withLink){
+      const li = el('div','ci' + (c.done ? ' done' : ''));
+      const top = el('div','ci-top'); top.append(el('span','ct t-' + (c.type||'note'), TYPES[c.type] || 'Note'));
+      if (withLink){ const a = el('a','ci-link', label(c.slide)); a.href = '#' + (c.slide==='general' ? 'actions' : c.slide); top.append(a); }
+      li.append(top, el('p','ci-text', c.text), el('small','ci-by', byline(c)));
+      if (canWrite){
+        const acts = el('div','ci-acts');
+        const d = el('button','lnk', c.done ? 'Reopen' : 'Mark actioned'); d.type='button'; d.addEventListener('click',()=>toggleDone(c)); acts.append(d);
+        if (owner || (c.by && c.by === me)){
+          const x = el('button','lnk del','Delete'); x.type='button'; let armed = false;
+          x.addEventListener('click',()=>{ if (!armed){ armed = true; x.textContent = 'Select again to delete'; setTimeout(()=>{ armed=false; x.textContent='Delete'; }, 4000); return; } put(c.id, null); });
+          acts.append(x);
+        }
+        li.append(acts);
+      }
+      return li;
+    }
+    function form(k){
+      const f = el('form','cf'); f.noValidate = true;
+      const ta = el('textarea'); ta.id = 'ta-' + k; ta.rows = 2; ta.maxLength = 2000; ta.placeholder = k==='general' ? 'Add a comment about the whole deck' : 'Add a comment on this slide';
+      ta.setAttribute('aria-label', 'Comment on ' + label(k));
+      const bar = el('div','cf-bar');
+      const sel = el('select'); sel.id = 'ty-' + k; sel.setAttribute('aria-label','Comment type');
+      Object.keys(TYPES).forEach(t=>{ const o = el('option',null,TYPES[t]); o.value = t; sel.append(o); });
+      const b = el('button','add','Add comment'); b.type = 'submit';
+      bar.append(sel, b); f.append(ta, bar);
+      f.addEventListener('submit', e=>{ e.preventDefault(); const t = ta.value.trim(); if (!t) { ta.focus(); return; } if (add(k, sel.value, t)) ta.value = ''; });
+      ta.addEventListener('keydown', e=>{ if (e.key==='Enter' && (e.metaKey||e.ctrlKey)) { e.preventDefault(); f.requestSubmit ? f.requestSubmit() : f.dispatchEvent(new Event('submit')); } });
+      return f;
+    }
+    function box(k){
+      const b = el('div','cm'); const h = el('div','cm-h','Comments'); const list = el('div','cm-list');
+      b.append(h, list, form(k)); boxes.push({k, list, h, root:b}); return b;
+    }
+    function paint(){
+      const v = view();
+      boxes.forEach(({k, list, h})=>{ const cs = forKey(k, v); list.replaceChildren(...cs.map(c=>item(c,false)));
+        const open = cs.filter(c=>!c.done).length; h.textContent = cs.length ? 'Comments (' + open + ' open' + (cs.length>open ? ', ' + (cs.length-open) + ' actioned' : '') + ')' : 'Comments'; });
+      // actions panel
+      const all = Object.keys(v).map(id=>Object.assign({id}, v[id]));
+      const open = all.filter(c=>!c.done), done = all.filter(c=>c.done);
+      document.getElementById('a-count').textContent = all.length ? open.length + ' to action, ' + done.length + ' actioned' : 'No comments yet';
+      const list = document.getElementById('a-list'); list.replaceChildren();
+      const shown = all.filter(c=>showDone || !c.done);
+      const groups = [['general','Whole deck']].concat(D.sessions.map(se=>[se.n, 'Session ' + se.n + ': ' + se.name]));
+      groups.forEach(([g, name])=>{
+        const cs = shown.filter(c=> g==='general' ? c.slide==='general' : (ROW[c.slide] && ROW[c.slide].s===g))
+          .sort((a,b)=>{ const ra=ROW[a.slide], rb=ROW[b.slide]; const na = ra ? (ra.n||ra.o) : 0, nb = rb ? (rb.n||rb.o) : 0; return na-nb || (a.at||'').localeCompare(b.at||''); });
+        if (!cs.length) return;
+        const sec = el('div','ag'); sec.append(el('h3',null,name + ' (' + cs.length + ')')); cs.forEach(c=>sec.append(item(c,true))); list.append(sec);
+      });
+      if (!list.children.length) list.append(el('p','empty', all.length ? 'Everything has been actioned.' : 'Nothing here yet. Comments added on any slide, or about the whole deck above, will collect here.'));
+      document.querySelectorAll('.cf').forEach(f=>f.hidden = live && !canWrite);
+      if (typeof window.__refilter === 'function') window.__refilter();
+    }
+    function resolveNames(){
+      if (!usr || !usr.profiles) return;
+      const v = view(); const ids = [...new Set(Object.values(v).flatMap(c=>[c.by, c.doneBy]).filter(Boolean))];
+      if (!ids.length) return;
+      usr.profiles(ids).then(ps=>{ let ch = false; ids.forEach(i=>{ const n = (ps[i] && ps[i].name) || ''; if (n && names[i] !== n){ names[i] = n; ch = true; } }); if (ch) paint(); }, ()=>{});
+    }
+    function openKeys(){ const v = view(); const s = new Set(); Object.values(v).forEach(c=>{ if (!c.done) s.add(c.slide); }); return s; }
+    async function start(){
+      if (!window.claude || !window.claude.use){ status('Comments save only when this page is open on claude.ai.', true); return; }
+      const db = await window.claude.use('db'); usr = await window.claude.use('user');
+      if (!db){ status('Sign in to claude.ai to see and add comments.', true); return; }
+      if (usr){ try { me = await usr.id(); } catch(e){} try { owner = !!(await usr.isOwner()); } catch(e){} }
+      let allowed = null; if (usr && usr.can){ try { allowed = await usr.can('data.write'); } catch(e){} }
+      canWrite = allowed !== false; live = true;
+      col = db.collection('comments');
+      status(canWrite ? 'Connecting.' : 'You can read comments here but not add them. Ask Craig for Contributor access.');
+      const slow = setTimeout(()=>status('Saved comments cannot be reached yet.', true), 10000);
+      col.limit(1000).onSnapshot(snap=>{
+        if (!snap.metadata.fromCache){ clearTimeout(slow); if (canWrite && !document.querySelector('[data-status].err')) status('Live. Comments save automatically.'); }
+        const next = {}; snap.docs.forEach(d=>next[d.id] = d.data()); docs = next; paint(); resolveNames();
+      }, ()=>{ clearTimeout(slow); status('Live updates stopped. Reload the page to reconnect.', true); });
+    }
+    return {box, paint, start, openKeys, setShowDone(v){ showDone = v; paint(); }, form};
+  })();
+
+  // tiles
+  const tiles = document.getElementById('tiles');
+  const tile = (big, lab, f, btn) => { const t = el('div','tile'); t.append(el('div','big',big), el('div','lab',lab));
+    if (f) { const b = el('button',null,btn); b.type='button'; b.addEventListener('click',()=>{setFilter(f); document.getElementById('main').scrollIntoView();}); t.append(b); }
+    tiles.append(t); };
+  tile(s.old + ' → ' + s.new, 'slides, October to November');
+  tile(String(s.kept), 'October slides carried over');
+  tile(String(s.added), 'new slides', 'newgone', 'Show new and removed');
+  tile(String(s.removed), 'slide removed');
+  tile(s.oavg + ' → ' + s.navg, 'average words on a slide');
+  tile(String(s.fb), 'slides with trial feedback', 'fb', 'Show these slides');
+
+  const fs = document.getElementById('fbsum');
+  [['done', s.st.done], ['partly', s.st.partly], ['open', s.st.open]].forEach(([k,n])=>{
+    const li = el('li'); const b = el('b', null, n + ' '); li.append(b, document.createTextNode((n===1?'slide: ':'slides: ') + ST[k].toLowerCase() + ' in the November deck')); fs.append(li); });
+  const li = el('li'); const b = el('button',null,'Show the slides where feedback is not fully acted on'); b.type='button';
+  b.style.cssText='all:unset;cursor:pointer;color:var(--accent);font-weight:700;border-bottom:1px solid currentColor';
+  b.addEventListener('click',()=>{setFilter('open'); document.getElementById('main').scrollIntoView();}); li.append(b); fs.append(li);
+
+  // sessions
+  const nav = document.getElementById('sessnav'), main = document.getElementById('main');
+  const rowsBySess = {};
+  D.rows.forEach(r => (rowsBySess[r.s] = rowsBySess[r.s] || []).push(r));
+  const all = [];
+  D.sessions.forEach(se => {
+    const a = el('a', null, 'Session ' + se.n); a.href = '#s' + se.n; nav.append(a);
+    const sec = el('section','session'); const w = el('div','wrap'); sec.append(w);
+    const h = el('div','shead'); h.id = 's' + se.n;
+    h.append(el('h2', null, 'Session ' + se.n + ': ' + se.name));
+    const rs = rowsBySess[se.n] || [];
+    const nOld = rs.filter(r=>r.o).length, nNew = rs.filter(r=>r.n).length;
+    h.append(el('span','meta', nOld + ' slides in October, ' + nNew + ' in November · trial timing ' + se.time));
+    w.append(h);
+    const empty = el('p','empty','No slides in this session match this filter.'); empty.hidden = true; w.append(empty);
+    rs.forEach(r => { const row = renderRow(r); w.append(row); all.push({row, r, sess: se.n}); });
+    sec._empty = empty; sec._n = se.n; main.append(sec);
+  });
+
+  function shot(dir, n, r){
+    const b = el('button','shot'); b.type='button';
+    const img = new Image(); img.src = 'img/' + dir + '/' + n + '.jpg'; img.loading='lazy'; img.decoding='async';
+    img.alt = (dir==='o'?'October':'November') + ' slide ' + n + ': ' + (dir==='o'? r.ot : r.nt);
+    b.append(img); b.addEventListener('click', ()=>zoom(r)); return b;
+  }
+  function renderRow(r){
+    const row = el('article','row');
+    const c1 = el('div'), c2 = el('div');
+    const h1 = el('div','colhead'); h1.append(el('b',null,'October'), document.createTextNode(r.o ? ' · slide ' + r.o : ''));
+    const h2 = el('div','colhead'); h2.append(el('b',null,'November'), document.createTextNode(r.n ? ' · slide ' + r.n : ''));
+    c1.append(h1, r.o ? shot('o', r.o, r) : el('div','none','Not in the October deck'));
+    c2.append(h2, r.n ? shot('n', r.n, r) : el('div','none','Not in the November deck'));
+    const nt = el('div','notes');
+    nt.append(el('span','pill k-' + r.k, KIND[r.k]));
+    nt.append(el('h3', null, r.n ? r.nt : r.ot));
+    const chg = el('div','chg'); (r.chg||'').split('\n').forEach(p=>chg.append(el('p',null,p))); nt.append(chg);
+    if (r.fb){
+      const f = el('div','fb' + (r.st==='done'?' done':''));
+      const hh = el('div','h'); hh.append(el('span',null,'Trial feedback'), el('span',null,ST[r.st]||''));
+      f.append(hh, el('p',null,r.fb));
+      if (r.ref) f.append(el('div','ref','Given on October ' + r.ref.replace(/^Slides?/, m => m.toLowerCase())));
+      nt.append(f);
+    }
+    row.id = keyOf(r);
+    row.append(c1, c2, nt);
+    return row;
+  }
+
+  // filters
+  const btns = [...document.querySelectorAll('.filters button')];
+  const test = {all:()=>true, fb:r=>!!r.fb, open:r=>r.st==='open'||r.st==='partly', newgone:r=>r.k==='new'||r.k==='removed', cm:r=>CM.openKeys().has(keyOf(r))};
+  let current = 'all';
+  window.__refilter = () => { if (current === 'cm') setFilter('cm'); };
+  function setFilter(f){
+    current = f;
+    btns.forEach(b=>b.setAttribute('aria-pressed', String(b.dataset.f===f)));
+    const shown = {};
+    all.forEach(({row,r,sess})=>{ const ok = test[f](r); row.hidden = !ok; if (ok) shown[sess]=1; });
+    document.querySelectorAll('section.session').forEach(sec=>{ sec._empty.hidden = !!shown[sec._n]; });
+    try { localStorage.setItem('lead-filter', f); } catch(e){}
+  }
+  btns.forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.f)));
+  let saved = 'all'; try { saved = localStorage.getItem('lead-filter') || 'all'; } catch(e){}
+  if (test[saved]) setFilter(saved);
+
+  // zoom
+  const dlg = document.getElementById('zoom'), zb = document.getElementById('zbody');
+  function zoom(r){
+    zb.replaceChildren();
+    [['o','October',r.o,r.ot],['n','November',r.n,r.nt]].forEach(([d,lab,n,t])=>{
+      const fig = el('figure'); fig.append(el('figcaption',null, lab + (n ? ' · slide ' + n : '')));
+      if (n){ const i = new Image(); i.src = 'img/'+d+'/'+n+'.jpg'; i.alt = lab + ' slide ' + n + ': ' + t; fig.append(i); }
+      else fig.append(el('div','none', 'Not in the ' + lab + ' deck'));
+      zb.append(fig);
+    });
+    document.getElementById('ztitle').textContent = r.n ? r.nt : r.ot;
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  }
+  document.getElementById('zclose').addEventListener('click',()=>dlg.close());
+  dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
+})();
+</script>
+</body>
+</html>
